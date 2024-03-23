@@ -54,8 +54,12 @@ func main() {
 		log.Fatalf("service not registered")
 		return
 	}
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = ":8080"
+	}
 	server := &http.Server{
-		Addr:         os.Getenv("PORT"),
+		Addr:         port,
 		Handler:      r,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
